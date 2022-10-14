@@ -3,7 +3,6 @@
 package hexgui.gui;
 
 import java.awt.Color;
-import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -21,25 +20,17 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.net.URL;
-import java.text.MessageFormat;
 import javax.swing.Box;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
-import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -168,7 +159,7 @@ public class GuiUtil
 
     public static ImageIcon getIcon(String icon, String name)
     {
-        String resource = "hexgui/images/" + icon + ".png";
+        String resource = "images/" + icon + ".png";
         URL url = GuiUtil.class.getClassLoader().getResource(resource);
         return new ImageIcon(url, name);
     }
@@ -350,7 +341,7 @@ public class GuiUtil
         // Sun Java 1.5.0). Best solution for now is to take an icon without
         // transparency
         s_iconURL =
-            loader.getResource("hexgui/images/hexgui-48x48-notrans.png");
+            loader.getResource("images/hexgui-48x48-notrans.png");
     }
 
     private static final Font MONOSPACED_FONT = Font.decode("Monospaced");

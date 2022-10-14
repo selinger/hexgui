@@ -2,13 +2,9 @@
 package hexgui.gui;
 
 import hexgui.util.Hexagon;
-import hexgui.hex.HexColor;
 import hexgui.hex.HexPoint;
 
-import javax.swing.*;          
 import java.awt.*;
-import java.awt.event.*;
-import java.net.URL;
 
 //----------------------------------------------------------------------------
 
@@ -19,7 +15,7 @@ public class BoardDrawerY extends BoardDrawerBase
     public BoardDrawerY()
     {
 	super();
-	loadBackground("hexgui/images/wood.png");
+	loadBackground("images/wood.png");
 	m_aspect_ratio = ASPECT_RATIO;
     }
 

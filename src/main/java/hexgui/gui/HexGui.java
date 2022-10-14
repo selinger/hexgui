@@ -12,12 +12,10 @@ import hexgui.htp.HtpController;
 import hexgui.htp.HtpError;
 import hexgui.util.StreamCopy;
 import hexgui.version.Version;
-import hexgui.gui.ParameterDialog;
 import hexgui.htp.AnalyzeDefinition;
 import hexgui.htp.AnalyzeCommand;
 import hexgui.htp.AnalyzeType;
 import hexgui.util.ErrorMessage;
-import hexgui.gui.ShowAnalyzeText;
 
 import java.io.*;
 import static java.text.MessageFormat.format;
@@ -26,7 +24,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Semaphore;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.awt.event.*;
 import java.net.*;
 
@@ -2655,7 +2652,7 @@ public final class HexGui
         // There are problems on some platforms with transparency (e.g. Linux
         // Sun Java 1.5.0). Best solution for now is to take an icon without
         // transparency
-        URL url = loader.getResource("hexgui/images/hexgui-48x48-notrans.png");
+        URL url = loader.getResource("images/hexgui-48x48-notrans.png");
         setIconImage(new ImageIcon(url).getImage());
     }
 

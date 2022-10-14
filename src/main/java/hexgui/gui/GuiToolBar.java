@@ -4,12 +4,9 @@
 
 package hexgui.gui;
 
-import hexgui.hex.HexColor;
 import hexgui.game.Node;
 
-import java.util.*;
-import javax.swing.*;          
-import java.awt.*;
+import javax.swing.*;
 import java.awt.event.*;
 import java.net.URL;
 
@@ -172,19 +169,19 @@ public final class GuiToolBar
 
     private void createToolBar()
     {
-	m_new = makeButton("hexgui/images/filenew.png", 
+	m_new = makeButton("images/filenew.png",
                            "newgame",
                            "New Game",
                            "New");
         m_toolBar.add(m_new);
 
-        m_load = makeButton("hexgui/images/fileopen.png", 
+        m_load = makeButton("images/fileopen.png",
                             "loadgame",
                             "Load Game",
                             "Load");
 	m_toolBar.add(m_load);
         
-        m_save = makeButton("hexgui/images/filesave2.png", 
+        m_save = makeButton("images/filesave2.png",
                             "savegame",
                             "Save Game",
                             "Save");
@@ -192,14 +189,14 @@ public final class GuiToolBar
         
 	m_toolBar.addSeparator();
 
-        m_setup_black = makeToggleButton("hexgui/images/setup-black.png",
+        m_setup_black = makeToggleButton("images/setup-black.png",
                                          "setup-black", 
                                          "Setup Black Stones",
                                          "Setup Black",
                                          KeyEvent.VK_B);
         m_toolBar.add(m_setup_black);
 
-        m_setup_white = makeToggleButton("hexgui/images/setup-white.png",
+        m_setup_white = makeToggleButton("images/setup-white.png",
                                          "setup-white", 
                                          "Setup White Stones",
                                          "Setup White",
@@ -208,42 +205,42 @@ public final class GuiToolBar
 
 	m_toolBar.addSeparator();
 	
-	m_beginning = makeButton("hexgui/images/beginning.png", 
+	m_beginning = makeButton("images/beginning.png",
 				 "game_beginning",
 				 "Game Start",
 				 "Start",
                                  KeyEvent.VK_HOME);
 	m_toolBar.add(m_beginning);
 	
-	m_back10 = makeButton("hexgui/images/backward10.png", 
+	m_back10 = makeButton("images/backward10.png",
 			      "game_backward10",
 			      "Go back ten moves",
 			      "Back10",
                               KeyEvent.VK_PAGE_UP);
 	m_toolBar.add(m_back10);
     
-	m_back = makeButton("hexgui/images/back.png", 
+	m_back = makeButton("images/back.png",
 			    "game_back",
 			    "Go back one move",
 			    "Back",
                             KeyEvent.VK_LEFT);
 	m_toolBar.add(m_back);
 
-	m_forward = makeButton("hexgui/images/forward.png", 
+	m_forward = makeButton("images/forward.png",
 			     "game_forward",
 			     "Go forward one move",
                              "Forward",
                              KeyEvent.VK_RIGHT);
 	m_toolBar.add(m_forward);
 
-	m_forward10 = makeButton("hexgui/images/forward10.png", 
+	m_forward10 = makeButton("images/forward10.png",
 				 "game_forward10",
 				 "Go forward ten moves",
 				 "Forward10",
                                  KeyEvent.VK_PAGE_DOWN);
 	m_toolBar.add(m_forward10);
 
-	m_end = makeButton("hexgui/images/end.png", 
+	m_end = makeButton("images/end.png",
 			   "game_end",
 			   "Go to end of game",
 			   "End",
@@ -252,14 +249,14 @@ public final class GuiToolBar
     
 	m_toolBar.addSeparator();
 
-	m_up = makeButton("hexgui/images/up.png",
+	m_up = makeButton("images/up.png",
 			  "game_up",
 			  "Explore previous variation",
 			  "Up",
                           KeyEvent.VK_UP);
 	m_toolBar.add(m_up);
 	
-	m_down = makeButton("hexgui/images/down.png",
+	m_down = makeButton("images/down.png",
 			  "game_down",
 			  "Explore next variation",
                           "Down",
@@ -268,7 +265,7 @@ public final class GuiToolBar
 
 	m_toolBar.addSeparator();
 
-	m_swap = makeButton("hexgui/images/swap.png",
+	m_swap = makeButton("images/swap.png",
 			    "game_swap_pieces",
 			    "Play swap move",
 			    "Swap");
@@ -277,7 +274,7 @@ public final class GuiToolBar
 
 	m_toolBar.addSeparator();
 
-	m_play = makeButton("hexgui/images/play.png",
+	m_play = makeButton("images/play.png",
 			    "genmove",
 			    "Generate computer move",
 			    "Play",
@@ -285,7 +282,7 @@ public final class GuiToolBar
 	m_toolBar.add(m_play);
 	m_play.setEnabled(false);
 
-	m_stop = makeButton("hexgui/images/stop.png",
+	m_stop = makeButton("images/stop.png",
 			    "stop",
 			    "Stop Action",
 			    "Stop");
@@ -295,17 +292,17 @@ public final class GuiToolBar
         m_toolBar.addSeparator();
 
 	String pref = m_preferences.get("first-move-color");
-	m_tomove = makeButton("hexgui/images/black-24x24.png",
+	m_tomove = makeButton("images/black-24x24.png",
                               "toggle_tomove",
                               "Color of player to move",
                               pref);
         m_tomove.setText("");
         {
-            URL imageURL = getURL("hexgui/images/black-24x24.png");
+            URL imageURL = getURL("images/black-24x24.png");
             m_black_to_play = new ImageIcon(imageURL, "black");
         }
         {
-            URL imageURL = getURL("hexgui/images/white-24x24.png");
+            URL imageURL = getURL("images/white-24x24.png");
             m_white_to_play = new ImageIcon(imageURL, "white");
         }
         setToMove(pref);
@@ -314,13 +311,13 @@ public final class GuiToolBar
 
         m_toolBar.addSeparator();
 
-        m_hint = makeButton("hexgui/images/hint-24x24.png",
+        m_hint = makeButton("images/hint-24x24.png",
                             "show_consider_set",
                             "Show provably inferior cells", "Hint");
         m_toolBar.add(m_hint);
         m_hint.setEnabled(false);
 
-        m_solve = makeButton("hexgui/images/solve.png",
+        m_solve = makeButton("images/solve.png",
                              "solve_state",
                              "Solve State with DFPN",
                              "Solve",
@@ -328,7 +325,7 @@ public final class GuiToolBar
         m_toolBar.add(m_solve);
         m_solve.setEnabled(false);
 
-        m_program_options = makeButton("hexgui/images/program-options.png",
+        m_program_options = makeButton("images/program-options.png",
                                        "program_options",
                                        "Program Options", "Options");
         m_toolBar.add(m_program_options);

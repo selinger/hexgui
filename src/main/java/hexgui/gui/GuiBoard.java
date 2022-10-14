@@ -94,13 +94,13 @@ public final class GuiBoard
         String path;
         
         if (name.equals("white")) {
-            path = "hexgui/images/cursor-white.png";
+            path = "images/cursor-white.png";
         } else if (name.equals("black")) {
-            path = "hexgui/images/cursor-black.png";
+            path = "images/cursor-black.png";
         } else if (name.equals("white-setup")) {
-            path = "hexgui/images/cursor-white-setup.png";
+            path = "images/cursor-white-setup.png";
         } else if (name.equals("black-setup")) {
-            path = "hexgui/images/cursor-black-setup.png";
+            path = "images/cursor-black-setup.png";
         } else {
             path = null;
         }
@@ -114,7 +114,7 @@ public final class GuiBoard
         URL url = classLoader.getResource(path);
         if (url == null) {
             System.out.println("setCursorType: could not load '" +
-                               "hexgui/images/cursor-white.png" + "'!");
+                    "images/cursor-white.png" + "'!");
             return;
         }
         Image img = new ImageIcon(url).getImage();

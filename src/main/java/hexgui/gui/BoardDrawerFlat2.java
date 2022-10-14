@@ -5,25 +5,21 @@
 package hexgui.gui;
 
 import hexgui.util.Hexagon;
-import hexgui.hex.HexColor;
 import hexgui.hex.HexPoint;
 
-import javax.swing.*;          
 import java.awt.*;
-import java.awt.event.*;
-import java.net.URL;
 
 //----------------------------------------------------------------------------
 
-public class BoardDrawerDiamond extends BoardDrawerBase
+public class BoardDrawerFlat2 extends BoardDrawerBase
 {
 
-    protected static final double ASPECT_RATIO = 1.1547;
+    protected static final double ASPECT_RATIO = 1.0/1.1547;
 
-    public BoardDrawerDiamond()
+    public BoardDrawerFlat2()
     {
 	super();
-	loadBackground("hexgui/images/wood.png");
+	loadBackground("images/wood.png");
 	m_aspect_ratio = ASPECT_RATIO;
     }
 
@@ -37,16 +33,9 @@ public class BoardDrawerDiamond extends BoardDrawerBase
     */
     protected Point getLocation(int x, int y)
     {
-	// yoffset will be positive when bwidth > bheight (to push the
-	// board down) and negative when bwidth < bheight (to lift it
-	// up) because the a1 square (0,0) will not be 
-	// in the center of the vertical space occupied by the board. 
-	int yoffset = (m_bwidth - m_bheight)*m_fieldHeight/2;
-
 	Point ret = new Point();
-	ret.x = m_marginX + (y + x)*m_step;
-	ret.y = m_marginY + yoffset + (m_bheight/2)*m_fieldHeight 
-	                  + (y - x)*m_fieldHeight/2;
+	ret.x = m_marginX + y*m_fieldWidth/2 + x*m_fieldWidth;
+	ret.y = m_marginY + (m_bheight-1-y)*m_step;
 	return ret;
     }
 
@@ -72,22 +61,23 @@ public class BoardDrawerDiamond extends BoardDrawerBase
 
     protected int calcFieldHeight(int w, int h, int bw, int bh)
     {
-	return h / (bh + 2);
+	return h / ((bh+1)/2 + (bh/4) + 4);
     }
 
     protected int calcStepSize()
     {
-	return m_fieldWidth/4 + m_fieldWidth/2;
+	return m_fieldHeight/4 + m_fieldHeight/2;
+	
     }
     protected int calcBoardWidth()
     {
-	return (m_bwidth+m_bheight-1)*m_step;
+	return m_bwidth*m_fieldWidth + (m_bheight-1)*m_fieldWidth/2;
     }
 
     protected int calcBoardHeight()
     {
-	return m_bheight*m_fieldHeight 
-	    + (m_bwidth - m_bheight)*m_fieldHeight/2;
+	return m_fieldHeight*(m_bheight+1)/2 
+	    +  m_fieldHeight*m_bheight/4;
     }
 
     protected Polygon[] calcCellOutlines(GuiField field[])
@@ -95,45 +85,38 @@ public class BoardDrawerDiamond extends BoardDrawerBase
 	Polygon outline[] = new Polygon[field.length];
         for (int x = 0; x < outline.length; x++) {
 	    Point p = getLocation(field[x].getPoint());
-	    outline[x] = Hexagon.createHorizontalHexagon(p,
-							 m_fieldWidth, 
-							 m_fieldHeight);
-// 	    System.out.println("-----");
-// 	    System.out.println(field[x].getPoint().toString());
-// 	    Polygon poly = outline[x];
-// 	    for (int j=0; j<6; j++) {
-// 		System.out.print("(" + poly.xpoints[j] + 
-// 				 "," + poly.ypoints[j] + 
-// 				 ") ");
-// 	    }
-// 	    System.out.println("");
+	    outline[x] = Hexagon.createVerticalHexagon(p,
+						       m_fieldWidth, 
+						       m_fieldHeight);
         }	
 	return outline;
     }
 
     protected void drawLabels(Graphics g, boolean alphatop)
     {
-	int xoffset;
 	String string;
+	int xoffset,yoffset;
 	g.setColor(Color.black);
 
-	xoffset = 0;
+	xoffset = m_fieldWidth/2;
+	yoffset = 1;
 	for (int x=0; x<m_bwidth; x++) {
 	    if (alphatop)
 		string = Character.toString((char)((int)'A' + x));
 	    else
 		string = Integer.toString(x+1);
 	    drawLabel(g, getLocation(x, -1), string, xoffset);
-	    drawLabel(g, getLocation(x, m_bheight), string, xoffset);
+	    drawLabel(g, getLocation(x-yoffset, m_bheight), string, xoffset);
 	}
-	xoffset = 0;	
+	xoffset = 0;
+	yoffset = 0;
 	for (int y=0; y<m_bheight; y++) {
 	    if (!alphatop)
 		string = Character.toString((char)((int)'A' + y));
 	    else
 		string = Integer.toString(y+1);
 	    drawLabel(g, getLocation(-1, y), string, xoffset);
-	    drawLabel(g, getLocation(m_bwidth, y), string, xoffset);
+	    drawLabel(g, getLocation(m_bwidth, y-yoffset), string, xoffset);
 	}
     }
 

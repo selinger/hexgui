@@ -71,7 +71,7 @@ public class AboutDialog
     private URL getImage(String name)
     {
         ClassLoader loader = getClass().getClassLoader();
-        return loader.getResource("hexgui/images/" + name);
+        return loader.getResource("images/" + name);
     }
 }
 

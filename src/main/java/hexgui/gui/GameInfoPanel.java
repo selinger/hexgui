@@ -7,13 +7,8 @@ package hexgui.gui;
 import hexgui.hex.HexColor;
 import hexgui.game.Clock;
 
-import java.io.*;
-import java.util.*;
 import javax.swing.*;
-import javax.swing.event.DocumentListener;
-import javax.swing.border.EtchedBorder;
 import java.awt.*;
-import java.awt.event.*;
 import java.net.URL;
 
 /** Displays info about the current game. */
@@ -27,7 +22,7 @@ public class GameInfoPanel
         
         JPanel bpanel = new JPanel();
         bpanel.setLayout(new BoxLayout(bpanel, BoxLayout.Y_AXIS));
-        URL bURL = getURL("hexgui/images/black-24x24.png");        
+        URL bURL = getURL("images/black-24x24.png");
         JLabel blab = new JLabel(new ImageIcon(bURL));
         blab.setAlignmentX(Component.CENTER_ALIGNMENT);
         bpanel.add(blab);
@@ -35,7 +30,7 @@ public class GameInfoPanel
 
         JPanel wpanel = new JPanel();
         wpanel.setLayout(new BoxLayout(wpanel, BoxLayout.Y_AXIS));
-        URL wURL = getURL("hexgui/images/white-24x24.png");
+        URL wURL = getURL("images/white-24x24.png");
         JLabel wlab = new JLabel(new ImageIcon(wURL));
         wlab.setAlignmentX(Component.CENTER_ALIGNMENT);
         wpanel.add(wlab);

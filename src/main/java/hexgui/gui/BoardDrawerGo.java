@@ -6,10 +6,7 @@ package hexgui.gui;
 
 import hexgui.hex.HexPoint;
 
-import javax.swing.*;          
 import java.awt.*;
-import java.awt.event.*;
-import java.net.URL;
 
 //----------------------------------------------------------------------------
 
@@ -18,7 +15,7 @@ public class BoardDrawerGo extends BoardDrawerBase
     public BoardDrawerGo()
     {
 	super();
-	loadBackground("hexgui/images/wood.png");
+	loadBackground("images/wood.png");
     }
 
     protected Point getLocation(int x, int y)
