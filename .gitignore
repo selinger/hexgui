@@ -1,5 +1,9 @@
 /build
 /local
+/target
+/.idea
+/out
 *.log
 *.class
 *.jar
+*.iml
