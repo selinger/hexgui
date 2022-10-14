@@ -1,73 +1,62 @@
-//----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // $Id$
-//----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
 package hexgui.gui;
 
+import java.awt.*;
+import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
-import javax.swing.border.EtchedBorder;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.event.DocumentListener;
 
 /** Displays comment for current node. */
-public class Comment 
-    extends JScrollPane
-    implements DocumentListener
-{
-   
-    public interface Listener
-    {
-        public void commentChanged(String msg);
-    }
+public class Comment extends JScrollPane implements DocumentListener {
 
-    public Comment(Listener listener)
-    {
-        m_listener = listener;
-        m_textPane = new JTextArea();
-        m_textPane.setFont(MONOSPACED_FONT);
-        m_textPane.setLineWrap(true);
-        m_textPane.setWrapStyleWord(true);
-        setViewportView(m_textPane);
-        setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        m_textPane.getDocument().addDocumentListener(this);
-        //setPreferredSize(new Dimension(200, 400));
-    }
+  public interface Listener {
+    public void commentChanged(String msg);
+  }
 
-    public void setText(String text)
-    {
-        m_textPane.setText(text);
-        m_textPane.getCaret().setDot(0);
-    }
+  public Comment(Listener listener) {
+    m_listener = listener;
+    m_textPane = new JTextArea();
+    m_textPane.setFont(MONOSPACED_FONT);
+    m_textPane.setLineWrap(true);
+    m_textPane.setWrapStyleWord(true);
+    setViewportView(m_textPane);
+    setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    m_textPane.getDocument().addDocumentListener(this);
+    // setPreferredSize(new Dimension(200, 400));
+  }
 
-    public void changedUpdate(DocumentEvent e)
-    {
-        notifyChanged();
-    }
+  public void setText(String text) {
+    m_textPane.setText(text);
+    m_textPane.getCaret().setDot(0);
+  }
 
-    public void removeUpdate(DocumentEvent e)
-    {
-        notifyChanged();
-    }
+  public void changedUpdate(DocumentEvent e) {
+    notifyChanged();
+  }
 
-    public void insertUpdate(DocumentEvent e)
-    {
-        notifyChanged();
-    }
+  public void removeUpdate(DocumentEvent e) {
+    notifyChanged();
+  }
 
-    private void notifyChanged()
-    {
-        m_listener.commentChanged(m_textPane.getText());
-    }
+  public void insertUpdate(DocumentEvent e) {
+    notifyChanged();
+  }
 
-    JTextArea m_textPane;
+  private void notifyChanged() {
+    m_listener.commentChanged(m_textPane.getText());
+  }
 
-    Listener m_listener;
+  JTextArea m_textPane;
 
-    private static final Font MONOSPACED_FONT = Font.decode("Monospaced");
+  Listener m_listener;
+
+  private static final Font MONOSPACED_FONT = Font.decode("Monospaced");
 }
 
-//----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------

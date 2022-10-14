@@ -4,24 +4,25 @@ package hexgui.hex;
 
 import java.util.Iterator;
 
-/** Const functions of go.PointList.
-    @see PointList */
-public interface ConstPointList
-    extends Iterable<HexPoint>
-{
-    boolean contains(Object elem);
+/**
+ * Const functions of go.PointList.
+ *
+ * @see PointList
+ */
+public interface ConstPointList extends Iterable<HexPoint> {
+  boolean contains(Object elem);
 
-    boolean equals(Object object);
+  boolean equals(Object object);
 
-    HexPoint get(int index);
+  HexPoint get(int index);
 
-    int hashCode();
+  int hashCode();
 
-    boolean isEmpty();
+  boolean isEmpty();
 
-    Iterator<HexPoint> iterator();
+  Iterator<HexPoint> iterator();
 
-    int size();
+  int size();
 
-    String toString();
+  String toString();
 }

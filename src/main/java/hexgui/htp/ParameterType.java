@@ -3,11 +3,10 @@
 package hexgui.htp;
 
 /** Parameter types in analyze commands of type "param". */
-public enum ParameterType
-{
-    STRING,
+public enum ParameterType {
+  STRING,
 
-    BOOL,
+  BOOL,
 
-    LIST
+  LIST
 }

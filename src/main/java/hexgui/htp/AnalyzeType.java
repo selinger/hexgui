@@ -3,53 +3,52 @@
 package hexgui.htp;
 
 /** Type of an analyze command. */
-public enum AnalyzeType
-{
-    BWBOARD,
+public enum AnalyzeType {
+  BWBOARD,
 
-    CBOARD,
+  CBOARD,
 
-    DBOARD,
+  DBOARD,
 
-    EPLIST,
+  EPLIST,
 
-    GFX,
+  GFX,
 
-    GROUP,
+  GROUP,
 
-    HSTRING,
+  HSTRING,
 
-    HPSTRING,
-        
-    INFERIOR,
+  HPSTRING,
 
-    MOVE,
+  INFERIOR,
 
-    NONE,
+  MOVE,
 
-    PARAM,
+  NONE,
 
-    PLIST,
+  PARAM,
 
-    PSTRING,
+  PLIST,
 
-    PSPAIRS,
+  PSTRING,
 
-    STRING,
+  PSPAIRS,
 
-    SBOARD,
+  STRING,
 
-    VAR,
+  SBOARD,
 
-    VARB,
+  VAR,
 
-    VARC,
+  VARB,
 
-    VARP,
+  VARC,
 
-    VARPO,
+  VARP,
 
-    VARW,
-    
-    VC    
+  VARPO,
+
+  VARW,
+
+  VC
 }

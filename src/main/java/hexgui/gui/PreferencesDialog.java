@@ -1,152 +1,127 @@
-//----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // $Id$
-//----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
 package hexgui.gui;
 
 import hexgui.hex.*;
-import javax.swing.*;          
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
-/** Dialog for changes user preferences.
-  */
-public final class PreferencesDialog 
-    extends JDialog implements ItemListener, ActionListener
-{
-    public PreferencesDialog(Frame owner, GuiPreferences preferences)
-    {
-        super(owner, true);
+/** Dialog for changes user preferences. */
+public final class PreferencesDialog extends JDialog implements ItemListener, ActionListener {
+  public PreferencesDialog(Frame owner, GuiPreferences preferences) {
+    super(owner, true);
 
-        m_preferences = preferences;
+    m_preferences = preferences;
 
-        JPanel generalPanel = createGeneralPanel();
-        JPanel boardPanel = createBoardPanel();
-        JPanel drawPanel = createDrawPanel();
-        JPanel buttonPane = createButtonPanel();
+    JPanel generalPanel = createGeneralPanel();
+    JPanel boardPanel = createBoardPanel();
+    JPanel drawPanel = createDrawPanel();
+    JPanel buttonPane = createButtonPanel();
 
-        JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("General", null,
-                          generalPanel,
-                          "General preferences");
-        tabbedPane.addTab("Board", null,
-                          boardPanel,
-                          "Board preferences");
-        tabbedPane.addTab("Draw", null,
-                          drawPanel, 
-                          "Drawing preferences");
+    JTabbedPane tabbedPane = new JTabbedPane();
+    tabbedPane.addTab("General", null, generalPanel, "General preferences");
+    tabbedPane.addTab("Board", null, boardPanel, "Board preferences");
+    tabbedPane.addTab("Draw", null, drawPanel, "Drawing preferences");
 
-        add(tabbedPane, BorderLayout.CENTER);
-        add(buttonPane, BorderLayout.SOUTH);
-        pack();
+    add(tabbedPane, BorderLayout.CENTER);
+    add(buttonPane, BorderLayout.SOUTH);
+    pack();
 
-        setVisible(true);
+    setVisible(true);
+  }
+
+  public void itemStateChanged(ItemEvent e) {
+    System.out.println("ItemEvent!");
+    Object source = e.getItemSelectable();
+  }
+
+  public void actionPerformed(ActionEvent e) {
+    String cmd = e.getActionCommand();
+    if (cmd.equals("OK")) {
+      savePreferences();
+      dispose();
+    } else if (cmd.equals("Cancel")) {
+      dispose();
     }
+  }
 
-    public void itemStateChanged(ItemEvent e)
-    {
-        System.out.println("ItemEvent!");
-        Object source = e.getItemSelectable();
+  private void savePreferences() {
+    System.out.println("Saving preferences...");
 
-    }
+    m_preferences.put("shell-show-on-connect", (showShellOnConnect.getSelectedObjects() != null));
+    m_preferences.put(
+        "analyze-show-on-connect", (showAnalyzeOnConnect.getSelectedObjects() != null));
+    m_preferences.put("auto-respond", (autoRespond.getSelectedObjects() != null));
+  }
 
-    public void actionPerformed(ActionEvent e)
-    {
-        String cmd = e.getActionCommand();
-        if (cmd.equals("OK")) {
-            savePreferences();
-            dispose();
-        } else if (cmd.equals("Cancel")) {
-            dispose();
-        }
-    }
+  private JPanel createGeneralPanel() {
+    JPanel panel = new JPanel();
+    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-    private void savePreferences()
-    {
-        System.out.println("Saving preferences...");
+    showShellOnConnect = createCheckBox("Show Shell on Program Connect", "shell-show-on-connect");
 
-        m_preferences.put("shell-show-on-connect", 
-                          (showShellOnConnect.getSelectedObjects() != null));
-        m_preferences.put("analyze-show-on-connect", 
-                          (showAnalyzeOnConnect.getSelectedObjects() != null));
-        m_preferences.put("auto-respond", 
-                          (autoRespond.getSelectedObjects() != null));
-        
-    }
+    showAnalyzeOnConnect =
+        createCheckBox("Show Analyze on Program Connect", "analyze-show-on-connect");
 
-    private JPanel createGeneralPanel()
-    {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    autoRespond = createCheckBox("Auto-respond", "auto-respond");
 
-        showShellOnConnect = createCheckBox("Show Shell on Program Connect",
-                                            "shell-show-on-connect");
+    panel.add(showShellOnConnect);
+    panel.add(showAnalyzeOnConnect);
+    panel.add(autoRespond);
 
-        showAnalyzeOnConnect = createCheckBox("Show Analyze on Program Connect",
-                                            "analyze-show-on-connect");
+    return panel;
+  }
 
-        autoRespond = createCheckBox("Auto-respond", "auto-respond");
+  private JPanel createDrawPanel() {
+    JPanel panel = new JPanel();
+    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        panel.add(showShellOnConnect);
-        panel.add(showAnalyzeOnConnect);
-        panel.add(autoRespond);
+    //         JLabel label;
 
-        return panel;
-    }
+    //         label = new JLabel("Field alpha percentage");
+    //         SpinnerNumberModel model =
+    //             new SpinnerNumberModel(m_preferences.getDouble("");
+    //         fieldAlpha = new JSpinner(new );
 
-    private JPanel createDrawPanel()
-    {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    return panel;
+  }
 
-//         JLabel label;
+  private JPanel createBoardPanel() {
+    JPanel panel = new JPanel(new BorderLayout());
+    panel.add(new JLabel("Board stuff"));
+    return panel;
+  }
 
-//         label = new JLabel("Field alpha percentage");
-//         SpinnerNumberModel model = 
-//             new SpinnerNumberModel(m_preferences.getDouble("");
-//         fieldAlpha = new JSpinner(new );
+  private JPanel createButtonPanel() {
+    JPanel panel = new JPanel();
 
-        return panel;
-    }
+    JButton button = new JButton("  OK  ");
+    button.addActionListener(this);
+    button.setActionCommand("OK");
+    panel.add(button);
 
+    button = new JButton("Cancel");
+    button.addActionListener(this);
+    button.setActionCommand("Cancel");
+    panel.add(button);
 
-    private JPanel createBoardPanel()
-    {
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add(new JLabel("Board stuff"));
-        return panel;
-    }
+    return panel;
+  }
 
-    private JPanel createButtonPanel()
-    {
-        JPanel panel = new JPanel();
-        
-        JButton button = new JButton("  OK  ");
-        button.addActionListener(this);
-        button.setActionCommand("OK");
-        panel.add(button);
-        
-        button = new JButton("Cancel");
-        button.addActionListener(this);
-        button.setActionCommand("Cancel");
-        panel.add(button);
+  private JCheckBox createCheckBox(String name, String prefname) {
+    JCheckBox box = new JCheckBox(name);
+    box.setSelected(m_preferences.getBoolean(prefname));
+    box.addItemListener(this);
+    return box;
+  }
 
-        return panel;
-    }
+  JCheckBox showShellOnConnect, showAnalyzeOnConnect;
+  JCheckBox autoRespond;
 
-    private JCheckBox createCheckBox(String name, String prefname)
-    {
-        JCheckBox box = new JCheckBox(name);
-        box.setSelected(m_preferences.getBoolean(prefname));
-        box.addItemListener(this);
-        return box;
-    }
+  JSpinner fieldAlpha;
 
-    JCheckBox showShellOnConnect, showAnalyzeOnConnect;
-    JCheckBox autoRespond;
-
-    JSpinner fieldAlpha;
-
-    GuiPreferences m_preferences;
+  GuiPreferences m_preferences;
 }
-
