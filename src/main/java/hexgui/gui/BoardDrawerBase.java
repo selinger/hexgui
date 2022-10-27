@@ -7,20 +7,11 @@ package hexgui.gui;
 import hexgui.hex.HexColor;
 import hexgui.hex.HexPoint;
 import hexgui.util.Pair;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.RenderingHints;
-import java.awt.event.*;
+
+import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
 import java.util.Vector;
-import javax.swing.*;
 
 // ----------------------------------------------------------------------------
 

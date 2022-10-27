@@ -5,9 +5,8 @@
 package hexgui.gui;
 
 import hexgui.hex.HexPoint;
+
 import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
 
 // ----------------------------------------------------------------------------
 
