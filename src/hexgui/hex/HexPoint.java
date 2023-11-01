@@ -31,8 +31,8 @@ public final class HexPoint implements Comparable
     public static final HexPoint FORFEIT;
     public static final HexPoint INVALID;
 
-    public static final int MAX_WIDTH  = 19;
-    public static final int MAX_HEIGHT = 19;
+    public static final int MAX_WIDTH  = 63;
+    public static final int MAX_HEIGHT = 63;
     public static final int MAX_POINTS = MAX_WIDTH*MAX_HEIGHT + 10;
 
     public static final int DEFAULT_SIZE = 11;
