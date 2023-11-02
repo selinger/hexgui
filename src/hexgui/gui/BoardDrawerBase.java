@@ -4,6 +4,7 @@
 
 package hexgui.gui;
 
+import hexgui.util.AlphabetNumber;
 import hexgui.util.Pair;
 import hexgui.util.RadialGradientPaint;
 import hexgui.hex.HexColor;
@@ -414,7 +415,7 @@ public abstract class BoardDrawerBase
         g.setColor(Color.black);
 
         for (int a=0; a<m_bwidth; a++) {
-            string = Character.toString((char)((int)'A' + a));
+            string = AlphabetNumber.toString(a + 1).toUpperCase();
             drawLabel(g, hexPoint(a, -m_labelradius, 0, 0, 0), string, 0);
             drawLabel(g, hexPoint(a, m_bheight-1+m_labelradius, 0, 0, 0), string, 0);
         }

@@ -4,6 +4,8 @@ import java.lang.Exception;
 import java.lang.NumberFormatException;
 import java.awt.Dimension;
 
+import hexgui.util.AlphabetNumber;
+
 /** A cell on a Hex board. 
     In addition to each playable cell, HexPoints are created for each edge of 
     the board and for some special cases like swap moves, resignations, and
@@ -57,7 +59,7 @@ public final class HexPoint implements Comparable
 
 	for (int y=0; y<MAX_HEIGHT; y++) {
 	    for (int x=0; x<MAX_WIDTH; x++) {
-		String name = "" + (char)('a' + x) + (y+1);
+		String name = AlphabetNumber.toString(x+1) + Integer.toString(y+1);
 		s_points[10 + y*MAX_WIDTH+ x] = new HexPoint(x, y, name);
 	    }
 	}
