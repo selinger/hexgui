@@ -1294,6 +1294,14 @@ public final class HexGui
     private void cbAnalyzeCommands()
     {
         String programAnalyzeCommands = m_white.getResponse();
+
+        // Because hexgui-analyze_commands is not required by GTP, engines
+        // are not expected to implement it. So we must be able to handle
+        // a failure response.
+        if (!m_white.wasSuccess()) {
+            programAnalyzeCommands = "";
+        }
+        
         try
         {
             m_analyzeCommands 
