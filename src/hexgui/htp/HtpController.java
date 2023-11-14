@@ -115,7 +115,7 @@ public class HtpController
                 m_response = "";
                 m_waiting = false;
                 throw new HtpError("Null response received!");
-            } else if (response.length() < 2) {
+            } else if (response.length() < 1) {
                 m_success = false;
                 m_response = response;
                 m_waiting = false;
@@ -129,15 +129,15 @@ public class HtpController
                 
                 m_guifx.guifx(fx);
                 
-            } else if (response.substring(0,2).equals("= ")) {
+            } else if (response.substring(0,1).equals("=")) {
                 m_success = true;
-                m_response = response.substring(2);
+                m_response = response.substring(1);
                 System.out.print("controller: success: ");
                 m_io.receivedResponse(response);
                 m_waiting = false;
-            } else if (response.substring(0,2).equals("? ")) {
+            } else if (response.substring(0,1).equals("?")) {
                 m_success = false;
-                m_response = response.substring(2);
+                m_response = response.substring(1);
                 System.out.print("controller: error: "); 
                 m_io.receivedError(response);
                 m_waiting = false;
