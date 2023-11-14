@@ -1066,6 +1066,7 @@ public final class HexGui
         if ((cmd.length() > 7 && cmd.substring(0, 7).equals("genmove")) ||
             (cmd.length() > 15 && cmd.substring(0, 15).equals("dfs-solve-state")) ||
             (cmd.length() > 16 && cmd.substring(0, 16).equals("dfpn-solve-state")) ||
+            (cmd.length() > 17 && cmd.substring(0, 17).equals("gogui-gfx-analyze")) ||
             (cmd.length() > 23 && cmd.substring(0, 23).equals("dfs-solver-find-winning")) ||
             (cmd.length() > 24 && cmd.substring(0, 24).equals("dfpn-solver-find-winning")))
             return true;
@@ -1553,10 +1554,27 @@ public final class HexGui
 
     public void cbSolveState()
     {
-        if (!m_white.wasSuccess())
+        if (!m_white.wasSuccess()) {
+            // If the backend didn't know dfpn-solve-state, try
+            // gogui-gfx-analyze instead.
+            Runnable callback = new GuiRunnable(new Runnable()
+                {
+                    public void run() { cbKataAnalyze(); }
+                });
+            sendCommand("gogui-gfx-analyze " + m_tomove + "\n", callback);
             return;
+        }
         String response = m_white.getResponse();
         m_statusbar.setMessage(format("Winning: {0}", response));
+    }
+
+    public void cbKataAnalyze()
+    {
+        if (!m_white.wasSuccess()) {
+            return;
+        }
+        String response = m_white.getResponse();
+        m_statusbar.setMessage(response);
     }
 
     //==================================================
