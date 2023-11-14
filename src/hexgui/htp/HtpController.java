@@ -133,13 +133,13 @@ public class HtpController
                 m_success = true;
                 m_response = response.substring(1);
                 System.out.print("controller: success: ");
-                m_io.receivedResponse(response);
+                m_io.receivedResponse(response + "\n");
                 m_waiting = false;
             } else if (response.substring(0,1).equals("?")) {
                 m_success = false;
                 m_response = response.substring(1);
                 System.out.print("controller: error: "); 
-                m_io.receivedError(response);
+                m_io.receivedError(response + "\n");
                 m_waiting = false;
             } else {
                 m_response = response;
