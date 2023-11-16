@@ -200,6 +200,7 @@ public abstract class BoardDrawerBase
 	setAntiAliasing(g);
 	drawBackground(g);
         drawEdges(g);
+        drawBackground(g, field);
 	drawCells(g, field);
 	drawLabels(g);
 	drawShadows(g, field);
@@ -469,6 +470,25 @@ public abstract class BoardDrawerBase
             g.setComposite(AlphaComposite.
                              getInstance(AlphaComposite.SRC_OVER, 
                                          field[i].getAlphaBlend()));
+            
+            g.setColor(color);
+            g.fill(m_outlines[i]);
+	}
+    }
+
+    protected void drawBackground(Graphics2D g, GuiField field[])
+    {
+        for (int i=0; i<m_outlines.length; i++) {
+            if ((field[i].getAttributes() & GuiField.DRAW_BACKGROUND) == 0)
+                continue;
+            
+            Color color = field[i].getBackgroundColor();
+            if (color == null)
+                continue;
+            
+            g.setComposite(AlphaComposite.
+                             getInstance(AlphaComposite.SRC_OVER, 
+                                         field[i].getBackgroundBlend()));
             
             g.setColor(color);
             g.fill(m_outlines[i]);

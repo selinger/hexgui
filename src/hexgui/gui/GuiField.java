@@ -27,6 +27,7 @@ public class GuiField
     public static final int DRAW_TEXT = 8;
     public static final int DRAW_ALPHA = 16;
     public static final int SELECTED = 32;
+    public static final int DRAW_BACKGROUND = 64;
 
     private static final Color COLOR_STONE_BLACK = Color.decode("#030303");
     private static final Color COLOR_STONE_BLACK_BRIGHT = Color.decode("#666666");
@@ -112,12 +113,7 @@ public class GuiField
 
     public void setAlphaColor(Color c)
     {
-	m_alpha_color = c;
-        m_alpha_blend = 0.3f;
-	if (c == null) 
-	    clearAttributes(DRAW_ALPHA);
-	else 
-	    setAttributes(DRAW_ALPHA);
+	setAlphaColor(c, 0.3f);
     }
 
     public void setAlphaColor(Color c, float blend)
@@ -130,12 +126,35 @@ public class GuiField
 	    setAttributes(DRAW_ALPHA);
     }
 
+    public void setBackgroundColor(Color c)
+    {
+	setBackgroundColor(c, 0.3f);
+    }
+
+    public void setBackgroundColor(Color c, float blend)
+    {
+	m_background_color = c;
+        m_background_blend = blend;
+	if (c == null) 
+	    clearAttributes(DRAW_BACKGROUND);
+	else 
+	    setAttributes(DRAW_BACKGROUND);
+    }
+
     public Color getAlphaColor() {
         return m_alpha_color;
     }
 
     public float getAlphaBlend() {
         return m_alpha_blend;
+    }
+
+    public Color getBackgroundColor() {
+        return m_background_color;
+    }
+
+    public float getBackgroundBlend() {
+        return m_background_blend;
     }
 
     public void setSelected(boolean f) 
@@ -269,6 +288,20 @@ public class GuiField
 
     }
 
+    private void drawBackground()
+    {
+	if (m_background_color == null)
+	    return;
+
+	m_graphics.setComposite(AlphaComposite.
+				  getInstance(AlphaComposite.SRC_OVER, 
+                                              0.3f));
+	m_graphics.setColor(m_background_color);
+	m_graphics.fillRect(m_width/2 - m_width/4, m_height/2 - m_height/4,
+			    m_width/2, m_height/2);
+
+    }
+
     private void drawText()
     {
         String[] lines = m_text.split("@");
@@ -300,6 +333,8 @@ public class GuiField
 
     private Color m_alpha_color;
     private float m_alpha_blend;
+    private Color m_background_color;
+    private float m_background_blend;
 
     private String m_text;
 

@@ -308,7 +308,8 @@ public final class GuiBoard
 	    m_field[x].clearAttributes(GuiField.LAST_PLAYED | 
                                        GuiField.SWAP_PLAYED | 
                                        GuiField.DRAW_TEXT | 
-                                       GuiField.DRAW_ALPHA);
+                                       GuiField.DRAW_ALPHA |
+                                       GuiField.DRAW_BACKGROUND);
         }
         repaint();
     }
@@ -431,6 +432,25 @@ public final class GuiBoard
         }
     }
     
+    /** Sets the given point's background color. */
+    public void setBackgroundColor(HexPoint point, Color color)
+    {
+        GuiField f = getField(point);
+        if (f != null) {
+            f.setBackgroundColor(color);
+            repaint();
+        }
+    }
+
+    public void setBackgroundColor(HexPoint point, Color color, float blend)
+    {
+        GuiField f = getField(point);
+        if (f != null) {
+            f.setBackgroundColor(color, blend);
+            repaint();
+        }
+    }
+
     /** Sets the given point's text. */
     public void setText(HexPoint point, String str)
     {

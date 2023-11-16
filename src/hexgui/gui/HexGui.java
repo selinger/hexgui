@@ -1592,6 +1592,8 @@ public final class HexGui
             guifx_dfpn(fx.substring(4));
         else if (fx.length() > 6 && fx.substring(0, 6).equals("solver"))
             guifx_solver(fx.substring(6));
+        else if (fx.length() > 4 && fx.substring(0, 4).equals("kata"))
+            guifx_kata(fx.substring(4));
     }
 
     private void guifx_uct(String fx)
@@ -1776,6 +1778,81 @@ public final class HexGui
 
         m_guiboard.repaint();
         m_statusbar.setMessage(fx.substring(text+5));
+    }
+
+    private void guifx_kata(String fx)
+    {
+        m_guiboard.clearMarks();
+        m_guiboard.aboutToDirtyStones();
+
+        ArrayList<String> move = new ArrayList<String>();
+        ArrayList<Integer> visits = new ArrayList<Integer>();
+        ArrayList<Double> winrate = new ArrayList<Double>();
+        ArrayList<Double> scoreLead = new ArrayList<Double>();
+        ArrayList<Integer> order = new ArrayList<Integer>();
+        move.add(null);
+        visits.add(null);
+        winrate.add(null);
+        scoreLead.add(null);
+        order.add(null);
+        int count = 0;
+        
+        String[] tokens = fx.split("\\s");
+        for (int i=0; i<tokens.length; i++) {
+            if (tokens[i].equals("info")) {
+                count++;
+                move.add(null);
+                visits.add(null);
+                winrate.add(null);
+                scoreLead.add(null);
+                order.add(null);
+            }
+            if (tokens[i].equals("move")) {
+                move.set(count, tokens[i+1]);
+                i++;
+            } else if (tokens[i].equals("visits")) {
+                visits.set(count, Integer.valueOf(tokens[i+1]));
+                i++;
+            } else if (tokens[i].equals("winrate")) {
+                winrate.set(count, Double.valueOf(tokens[i+1]));
+                i++;
+            } else if (tokens[i].equals("scoreLead")) {
+                scoreLead.set(count, Double.valueOf(tokens[i+1]));
+                i++;
+            } else if (tokens[i].equals("order")) {
+                order.set(count, Integer.valueOf(tokens[i+1]));
+                i++;
+            }
+        }
+        // for (int i=1; i<=count; i++) {
+        //     System.out.println(move.get(i) + " " + visits.get(i) + " " + winrate.get(i) + " " + scoreLead.get(i) + " " + order.get(i));
+        // }
+
+        String msg = "";
+        
+        for (int i=1; i<=count; i++) {
+            HexPoint point = HexPoint.get(move.get(i));
+            if (order.get(i) == 0) {
+                m_guiboard.setBackgroundColor(point, new Color(13, 215, 210), 1);
+                msg = String.format("Leading move: %s, winrate %.2f", move.get(i), winrate.get(i)*100);
+            } else if (winrate.get(i) >= 0.9) {
+                m_guiboard.setBackgroundColor(point, Color.green);
+            } else if (winrate.get(i) >= 0.8) {
+                m_guiboard.setBackgroundColor(point, Color.yellow);
+            } else if (winrate.get(i) >= 0.7) {
+                m_guiboard.setBackgroundColor(point, Color.orange);
+            } else {
+                // m_guiboard.setBackgroundColor(point, Color.red);
+            }                
+            if (!point.is_cell()) {
+                continue;
+            }
+            String label = String.format("%.2f@%d@%.2f", winrate.get(i)*100, visits.get(i), scoreLead.get(i));
+            m_guiboard.setText(point, label);
+        }
+        
+        m_guiboard.repaint();
+        m_statusbar.setMessage(msg);
     }
 
     private void showDfpnBounds(String str)
