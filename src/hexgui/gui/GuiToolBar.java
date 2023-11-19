@@ -322,7 +322,7 @@ public final class GuiToolBar
 
         m_solve = makeButton("hexgui/images/solve.png",
                              "solve_state",
-                             "Solve State with DFPN",
+                             "Run analysis",
                              "Solve",
                              KeyEvent.VK_S);
         m_toolBar.add(m_solve);
