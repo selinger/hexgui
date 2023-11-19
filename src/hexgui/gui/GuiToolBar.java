@@ -288,7 +288,8 @@ public final class GuiToolBar
 	m_stop = makeButton("hexgui/images/stop.png",
 			    "stop",
 			    "Stop Action",
-			    "Stop");
+			    "Stop",
+                             KeyEvent.VK_X);
 	m_toolBar.add(m_stop);
 	disableStopButton();
 
