@@ -200,7 +200,7 @@ public abstract class BoardDrawerBase
 	setAntiAliasing(g);
 	drawBackground(g);
         drawEdges(g);
-        drawBackground(g, field);
+        drawCellBackground(g, field);
 	drawCells(g, field);
 	drawLabels(g);
 	drawShadows(g, field);
@@ -476,7 +476,7 @@ public abstract class BoardDrawerBase
 	}
     }
 
-    protected void drawBackground(Graphics2D g, GuiField field[])
+    protected void drawCellBackground(Graphics2D g, GuiField field[])
     {
         for (int i=0; i<m_outlines.length; i++) {
             if ((field[i].getAttributes() & GuiField.DRAW_BACKGROUND) == 0)
