@@ -238,6 +238,7 @@ public abstract class BoardDrawerBase
     */
     protected void drawCells(Graphics2D g, GuiField field[])
     {
+        g.setComposite(AlphaComposite.SrcOver);
         g.setStroke(new BasicStroke((float)(m_strokewidth * m_scale)));
 	g.setColor(Color.black);
 	for (int i=0; i<m_outlines.length; i++) {
