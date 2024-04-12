@@ -1,4 +1,5 @@
-HexGui README [10/02/26]
+Short installation instructions:
+================================
 
 To build: 
   ant
@@ -6,5 +7,17 @@ To build:
 To run:
   bin/hexgui
   
-  
-version date: 2020-05-25 03:42
+
+More detailed installation instructions:
+========================================
+
+Windows:
+
+First install Java, then the Apache Ant build tool for Java.  As part
+of this you need to set the ANT_HOME and PATH environment variables on
+your system appropriately. See this tutorial https://youtu.be/zmuMAHa8r2g
+
+Then, enter the HexGUI project folder in the Terminal, noting that
+there is a "build.xml" file, and here run the command-line command
+"ant". This builds the project. You can now find the runnable .jar
+Java program in the lib folder for HexGUI.
