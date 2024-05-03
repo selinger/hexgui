@@ -75,6 +75,14 @@ public abstract class BoardDrawerBase
 	}
     }
 
+    private double softmin(double a, double b) {
+        double k = 0.001;
+        double x = a/(a+b);
+        double y = 2*x-1;
+        double z = (1-Math.sqrt((y*y+k)/(1+k))) / 2;
+        return z * (a+b);
+    }
+    
     /** Calculates and sets the geometry of the board. */
     public void setGeometry(int w, int h, int bw, int bh, double rotation, boolean mirrored)
     {
@@ -139,7 +147,7 @@ public abstract class BoardDrawerBase
         // Scaling factor.
         double scaleX = w / (maxX - minX + 2*m_margin);
         double scaleY = h / (maxY - minY + 2*m_margin);
-        double scale = Math.min(scaleX, scaleY);
+        double scale = softmin(scaleX, scaleY);
 
         // Geometry.
         m_dfileX = dfX * scale;
