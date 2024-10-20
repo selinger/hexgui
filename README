@@ -1,15 +1,27 @@
-Short installation instructions:
-================================
+To run:
+=======
+
+Run Java on the included JAR file, e.g.:
+
+  java -jar lib/hexgui.jar
+
+Alternatively, you may also be able to run it like this:
+
+  bin/hexgui
+
+
+To build from sources:
+======================
+
+Short build instructions:
+-------------------------
 
 To build: 
   ant
 
-To run:
-  bin/hexgui
-  
 
-More detailed installation instructions:
-========================================
+More detailed build instructions:
+---------------------------------
 
 Windows:
 

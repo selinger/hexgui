@@ -2,5 +2,4 @@
 /local
 *.log
 *.class
-*.jar
 *~
