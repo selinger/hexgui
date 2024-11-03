@@ -1271,6 +1271,7 @@ public final class HexGui
 	    };
         sendCommand("boardsize " + size.width + " " + size.height + "\n",
                     callback);
+        sendCommand("clear_board\n", null);
         m_statusbar.setMessage("New game");
     }
     
