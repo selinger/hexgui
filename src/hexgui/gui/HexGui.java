@@ -709,11 +709,14 @@ public final class HexGui
 
 	try
         {
-	    StringTokenizer st = new StringTokenizer(size);
+	    StringTokenizer st = new StringTokenizer(size, " x");
 	    int w = Integer.parseInt(st.nextToken());
-	    st.nextToken();
-	    int h = Integer.parseInt(st.nextToken());
-	    dim.setSize(w,h);
+            if (!st.hasMoreTokens()) {
+                dim.setSize(w,w);
+            } else {
+                int h = Integer.parseInt(st.nextToken());
+                dim.setSize(w,h);
+            }
 	}
 	catch (Throwable t)
         {
